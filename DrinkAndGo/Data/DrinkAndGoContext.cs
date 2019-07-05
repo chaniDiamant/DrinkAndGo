@@ -27,5 +27,10 @@ namespace DrinkAndGo.Models
         public DbSet<DrinkAndGo.Models.Order> Order { get; set; }
 
         public DbSet<DrinkAndGo.Models.OrderDetail> OrderDetail { get; set; }
+
+        internal static Task<string> ToListAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

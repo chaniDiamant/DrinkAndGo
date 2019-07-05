@@ -24,6 +24,14 @@ namespace DrinkAndGo.Controllers
             var drinkAndGoContext = _context.Drink.Include(d => d.Category);
             return View(await drinkAndGoContext.ToListAsync());
         }
+        public async Task<IActionResult> Search(string drinkname)
+        {
+            var result = from d in _context.Drink
+                         where d.Name == drinkname
+                         select d;
+            return View(await result.ToListAsync());
+        }
+
 
         // GET: Drinks/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -56,7 +64,7 @@ namespace DrinkAndGo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DrinkId,Name,ShortDescription,Price,ImageUrl,ImageThumbnailUrl,IsPreferredDrink,InStock,CategoryId")] Drink drink)
+        public async Task<IActionResult> Create([Bind("DrinkId,Name,ShortDescription,LongDescription,Price,ImageUrl,ImageThumbnailUrl,IsPreferredDrink,InStock,CategoryId")] Drink drink)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +98,7 @@ namespace DrinkAndGo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DrinkId,Name,ShortDescription,Price,ImageUrl,ImageThumbnailUrl,IsPreferredDrink,InStock,CategoryId")] Drink drink)
+        public async Task<IActionResult> Edit(int id, [Bind("DrinkId,Name,ShortDescription,LongDescription,Price,ImageUrl,ImageThumbnailUrl,IsPreferredDrink,InStock,CategoryId")] Drink drink)
         {
             if (id != drink.DrinkId)
             {
