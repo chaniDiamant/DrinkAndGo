@@ -53,6 +53,20 @@ namespace DrinkAndGo.Controllers
             return View(await result.ToListAsync());
         }
 
+        public async Task<IActionResult> Index1()
+        {
+            //var q = from d in _context.Drink
+            //        select d.Price;
+
+            //ViewBag.data = "[" + string.Join(",", q.ToList()) + "]";
+
+            var result = from d in _context.Drink
+                         group d by (d.Price %10== 0) into groups
+                         select groups;
+
+            return View(await _context.Drink.ToListAsync());
+        }
+
 
         // GET: Drinks/Details/5
         public async Task<IActionResult> Details(int? id)
