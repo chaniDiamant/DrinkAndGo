@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DrinkAndGo.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace DrinkAndGo.Controllers
 {
@@ -63,7 +64,32 @@ namespace DrinkAndGo.Controllers
             }
             return View(user);
         }
+        public IActionResult Login()
+        {
+            ViewBag.Fail = false;
+             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("UserName,Password")] User user)
+        {
+            var result = from u in _context.User
+                         where u.UserName == user.UserName && u.Password == user.Password
+                         select u;
 
+            if (result.ToList().Count > 0)
+            {
+                HttpContext.Session.SetString("user", user.UserName);
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.Fail = true;
+
+
+
+            return View(user);
+        }
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
