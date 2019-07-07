@@ -17,7 +17,7 @@
     </environment>
 </head>
 <body>
-   
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -36,28 +36,28 @@
             </form>
 
             <ul class="nav navbar-nav">
-                <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
-                <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
             </ul>
 
-                <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
 
-                    <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                        <li class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a>
-                                <a class="dropdown-item" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a>
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a>
+                            <a class="dropdown-item" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a>
 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="container body-content">
@@ -90,5 +90,6 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+    <script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
 </body>
 </html>

@@ -3,7 +3,18 @@
 @{
     ViewData["Title"] = "Index";
 }
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 
+@{
+    ViewData["Title"] = "Index";
+}
+
+<script>
+    var data = @ViewBag.data;
+</script>
+
+<div class="chart"></div>
 <h2>Index</h2>
 
 <p>
@@ -25,20 +36,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UserName">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserName">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserName">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UserName">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserName">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserName">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

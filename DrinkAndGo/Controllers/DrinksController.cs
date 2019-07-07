@@ -41,14 +41,14 @@ namespace DrinkAndGo.Controllers
         public async Task<IActionResult> Alcoholic()
         {
             var result = from d in _context.Drink
-                         where d.Category.CategoryId == 1
+                         where d.Category.CategoryId == 4
                          select d;
             return View(await result.ToListAsync());
         }
         public async Task<IActionResult> NonAlcoholic()
         {
             var result = from d in _context.Drink
-                         where d.Category.CategoryId == 2
+                         where d.Category.CategoryId == 5
                          select d;
             return View(await result.ToListAsync());
         }

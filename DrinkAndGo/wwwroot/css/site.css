@@ -33,5 +33,13 @@
     .carousel-caption {
         display: none;
     }
-    
+
+    .chart div {
+        font: 10px sans-serif;
+        background-color: yellow;
+        text-align: right;
+        padding: 3px;
+        margin: 1px;
+        color: black;
+    }
 }
