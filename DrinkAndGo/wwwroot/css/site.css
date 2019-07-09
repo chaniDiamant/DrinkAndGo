@@ -33,8 +33,9 @@
     .carousel-caption {
         display: none;
     }
+}
 
-    .chart div {
+.chart div {
         font: 10px sans-serif;
         background-color: yellow;
         text-align: right;
@@ -42,4 +43,63 @@
         margin: 1px;
         color: black;
     }
+
+
+.navbar-inverse {
+    background-color: #000099;
+    border-color: white;
+}
+
+
+.navbar-inverse .navbar-brand {
+        color: white;
+    }
+
+.navbar-inverse .navbar-nav > li > a {
+        color: white;
+    }
+
+.navbar-header {
+    padding: 8px;
+}
+
+
+.form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+    float: right;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    float: right;
+}
+
+
+.chart div {
+    font: 10px sans-serif;
+    background-color: yellow;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: black;
 }
