@@ -2,13 +2,11 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/views/Shared/_Layout2.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 
         @foreach (var item in Model)
         {
@@ -56,5 +54,4 @@
                 </td>
             </tr>*@
         }
-    </tbody>
-</table>
+    

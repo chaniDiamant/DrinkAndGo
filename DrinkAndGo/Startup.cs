@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using DrinkAndGo.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace DrinkAndGo
 {
@@ -27,6 +28,8 @@ namespace DrinkAndGo
 
             services.AddDbContext<DrinkAndGoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DrinkAndGoContext")));
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddScoped(sp => ShoppingCart.GetCart(sp));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

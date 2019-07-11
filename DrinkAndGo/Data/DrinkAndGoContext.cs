@@ -32,5 +32,7 @@ namespace DrinkAndGo.Models
         {
             throw new NotImplementedException();
         }
+
+        public DbSet<DrinkAndGo.Models.Store> Store { get; set; }
     }
 }
