@@ -51,7 +51,7 @@ namespace DrinkAndGo
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Drinks}/{action=ThePreferredDrinks}/{id?}");
             });
         }
     }
