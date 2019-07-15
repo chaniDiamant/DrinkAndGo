@@ -27,18 +27,14 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ImageUrl)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ImageThumbnailUrl)
-                </th>
+                
                 <th>
                     @Html.DisplayNameFor(model => model.IsPreferredDrink)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.InStock)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -58,20 +54,16 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="ASP.NET" class="img1" />
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageThumbnailUrl)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.IsPreferredDrink)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InStock)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryId)
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DrinkId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.DrinkId">Details</a> |
