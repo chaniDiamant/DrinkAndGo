@@ -24,10 +24,10 @@ namespace DrinkAndGo.Controllers
             var drinkAndGoContext = _context.Drink.Include(d => d.Category);
             return View(await drinkAndGoContext.ToListAsync());
         }
-        public async Task<IActionResult> Search(string drinkname)
+        public async Task<IActionResult> Search(string drinkname, decimal price,bool instok)
         {
             var result = from d in _context.Drink
-                         where d.Name == drinkname
+                         where( d.Name == drinkname && d.Price<price && d.InStock==instok)
                          select d;
             return View(await result.ToListAsync());
         }
