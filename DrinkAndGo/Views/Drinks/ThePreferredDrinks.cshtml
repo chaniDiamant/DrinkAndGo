@@ -14,13 +14,13 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img src="~/images/carousel1.jpg" alt="ASP.NET" class="img-responsive" />
+                <img src="~/images/carousel3.jpg" alt="ASP.NET" class="img-responsive" />
                 <div class="carousel-caption" role="option">
 
                 </div>
             </div>
             <div class="item">
-                <img src="~/images/carousel2.jpg" alt="Visual Studio" class="img-responsive" />
+                <img src="~/images/carousel1.jpg" alt="Visual Studio" class="img-responsive" />
                 <div class="carousel-caption" role="option">
                     <p>
                         Learn about the history of the alcohol
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="item">
-                <img src="~/images/carousel3.jpg" alt="Package Management" class="img-responsive" />
+                <img src="~/images/carousel2.jpg" alt="Package Management" class="img-responsive" />
                 <div class="carousel-caption" role="option">
 
                 </div>
@@ -43,7 +43,7 @@
                 {
                     <div class="card-deck">
                         <div class="card">
-                            <img class="card-img-top" src="~/images/BEER.jpg" alt="Card image cap">
+                            <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                                 <p class="card-text">@Html.DisplayFor(modelItem => item.ShortDescription)</p>
