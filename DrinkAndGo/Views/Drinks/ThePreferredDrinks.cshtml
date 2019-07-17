@@ -4,7 +4,6 @@
     ViewData["Title"] = "Index";
 
 }
-
     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -33,11 +32,21 @@
             <div class="item">
                 <img src="~/images/carousel2.jpg" alt="Package Management" class="img-responsive" />
                 <div class="carousel-caption" role="option">
-
+                    <p>
+                        Preferred drink vs. Non preferred drinks
+                        <a class="btn btn-default" asp-controller="Drinks" asp-action="Check">
+                            Learn More
+                        </a>
+                    </p>
                 </div>
             </div>
-            <h2>Preferred drinks of the week</h2>
-            <h4>Clients preferences - just for you</h4>
+            <section>
+                <h3>Preferred drinks of the week</h3>
+                <h3>Clients preferences - just for you</h3>
+            </section>
+                
+           
+           
             <div class="bar">
                 @foreach (var item in Model)
                 {
@@ -53,40 +62,5 @@
 
                     </div>}
             </div>
-
-            @*<tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LongDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageThumbnailUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsPreferredDrink)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InStock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryId)*@
-            @*</td>
-        <td>*@
-            @*<a asp-action="Edit" asp-route-id="@item.DrinkId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DrinkId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DrinkId">Delete</a>
-            </td>
-        </tr>*@
 
 

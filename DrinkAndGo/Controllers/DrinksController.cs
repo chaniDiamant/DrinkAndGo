@@ -24,7 +24,15 @@ namespace DrinkAndGo.Controllers
             var drinkAndGoContext = _context.Drink.Include(d => d.Category);
             return View(await drinkAndGoContext.ToListAsync());
         }
-        public async Task<IActionResult> Search(string drinkname, decimal price,bool instok)
+        public async Task<IActionResult> Check()
+        {
+            var q = from u in _context.Drink
+                    group u by u.IsPreferredDrink==true into groups
+                    select groups.Count();
+            ViewBag.data = "[" + string.Join(",", q.ToList()) + "]";
+            return View(await _context.Drink.ToListAsync());
+        }
+            public async Task<IActionResult> Search(string drinkname, decimal price,bool instok)
         {
             var result = from d in _context.Drink
                          where( d.Name == drinkname && d.Price<price && d.InStock==instok)

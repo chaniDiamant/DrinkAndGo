@@ -17,6 +17,9 @@
     <Content Update="Views\Drinks\Alcoholic.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Drinks\Check.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Drinks\NonAlcoholic.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

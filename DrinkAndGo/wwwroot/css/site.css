@@ -36,14 +36,7 @@
     }
 }
 
-.chart div {
-        font: 10px sans-serif;
-        background-color: yellow;
-        text-align: right;
-        padding: 3px;
-        margin: 1px;
-        color: black;
-    }
+
 
 
 .navbar-inverse {
@@ -91,14 +84,14 @@
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: 2px;
     float: right;
 }
 
 
 .chart div {
-    font: 10px sans-serif;
-    background-color: yellow;
+    font: 30px small-caps;
+    background-color: lightgray;
     text-align: right;
     padding: 3px;
     margin: 1px;
@@ -134,4 +127,8 @@ p{
 }
 h5 {
     font-size: 20px;
+}
+
+h3{
+     text-shadow: 2px 2px lightgray;
 }
