@@ -127,6 +127,9 @@ p{
 }
 h5 {
     font-size: 20px;
+    border: 1px solid black;
+    padding: 7px;
+    border-radius: 15px;
 }
 
 h3{
@@ -137,3 +140,4 @@ h2 {
     color: gray;
     text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;
 }
+
