@@ -18,15 +18,11 @@ namespace DrinkAndGo.Models
 
         public DbSet<DrinkAndGo.Models.Drink> Drink { get; set; }
 
-        public DbSet<DrinkAndGo.Models.ShoppingCart> ShoppingCart { get; set; }
-
-        public DbSet<DrinkAndGo.Models.ShoppingCartItem> ShoppingCartItem { get; set; }
+      
 
         public DbSet<DrinkAndGo.Models.User> User { get; set; }
 
-        public DbSet<DrinkAndGo.Models.Order> Order { get; set; }
-
-        public DbSet<DrinkAndGo.Models.OrderDetail> OrderDetail { get; set; }
+        
 
         internal static Task<string> ToListAsync()
         {
