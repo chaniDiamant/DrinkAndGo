@@ -88,7 +88,6 @@ namespace DrinkAndGo.Controllers
 
             if (result.ToList().Count > 0)
             {
-                HttpContext.Session.SetString("user", user.UserName);
 
                 return RedirectToAction(nameof(Index));
             }
