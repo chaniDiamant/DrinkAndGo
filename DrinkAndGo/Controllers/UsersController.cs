@@ -13,6 +13,8 @@ namespace DrinkAndGo.Controllers
     public class UsersController : Controller
     {
         private readonly DrinkAndGoContext _context;
+        public static string UserRole = null;
+        public static string UserName = null;
 
         public UsersController(DrinkAndGoContext context)
         {
@@ -63,7 +65,7 @@ namespace DrinkAndGo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,Age,Password")] User user)
+        public async Task<IActionResult> Create([Bind("UserName,Age,Password,Role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -88,8 +90,9 @@ namespace DrinkAndGo.Controllers
 
             if (result.ToList().Count > 0)
             {
-
-                return RedirectToAction(nameof(Index));
+                UserRole = result.FirstOrDefault().Role;
+                UserName = result.FirstOrDefault().UserName;
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.Fail = true;

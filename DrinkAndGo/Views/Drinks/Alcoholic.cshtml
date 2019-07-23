@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<DrinkAndGo.Models.Drink>
+@using DrinkAndGo.Controllers
 
 @{
     ViewData["Title"] = "Index";
@@ -66,12 +67,15 @@
                 @Html.DisplayFor(modelItem => item.InStock)
             </td>
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DrinkId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DrinkId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DrinkId">Delete</a>
-            </td>
-        </tr>
+            @if (@UsersController.UserRole == "Admin")
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DrinkId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DrinkId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DrinkId">Delete</a>
+                </td>
+            }
+            </tr>
 }
     </tbody>
 </table>

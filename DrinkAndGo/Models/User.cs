@@ -13,6 +13,7 @@ namespace DrinkAndGo.Models
         public int Age { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
+        public string Role { get; set; }
 
     }
 }

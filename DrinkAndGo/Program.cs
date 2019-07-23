@@ -256,6 +256,24 @@ namespace DrinkAndGo
                     }); 
                     context.SaveChanges();
                 }
+                if (context.User.Count() == 0)
+                {
+                    context.Add(new User()
+                    {
+                        UserName = "Gil",
+                        Password = "1234",
+                        Role = "Admin",
+                        Age = 20
+                    });
+                    context.Add(new User()
+                    {
+                        UserName = "Eli",
+                        Password = "1111",
+                        Role = "Official",
+                        Age = 30
+                    });
+                    context.SaveChanges();
+                }
             }
 
             host.Run();

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using DrinkAndGo.Controllers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -35,20 +36,37 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Enter drink name" aria-label="Search" name="drinkname">
                 <input class="form-control mr-sm-2" type="search" placeholder="Enter max price" aria-label="Search" name="price">
                 <input class="form-control mr-sm-2" type="search" placeholder="Instock/Not instock" aria-label="Search" name="instok">
+                @if (@UsersController.UserName != null)
+                {
+                    <div>Hello @UsersController.UserName</div>
+                }
             </form>
 
 
             <div class="navbar-collapse collapse">
 
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
-                    <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
-                    <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact And Stores</a></li>
-                    <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
-                    <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
-                   
+                    @if (@UsersController.UserRole == "Admin")
+                    {
+                        <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
+                        <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
+                        <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact And Stores</a></li>
+                        <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
+                        <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
+                        <li><a asp-area="" asp-controller="Users" asp-action="Index">All Users</a></li>
+                    }
+                    @if (@UsersController.UserRole == null || @UsersController.UserRole == "Official")
+                    {
+                        <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
+                        <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
+                        <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact And Stores</a></li>
+                        <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
+                        <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
+                    }
                 </ul>
+                
             </div>
         </div>
     </nav>
