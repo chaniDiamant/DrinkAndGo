@@ -53,6 +53,14 @@ namespace DrinkAndGo.Controllers
 
             return View(user);
         }
+         public async Task<IActionResult> Check()
+        {
+            var q = from u in _context.User.Distinct()
+                    orderby u.Age
+                    select u.Age;
+            ViewBag.data = "[" + string.Join(",", q.ToList()) + "]";
+            return View(await _context.User.ToListAsync());
+        }
         public async Task<IActionResult> Search(string name, decimal age, string type)
         {
             var result = from d in _context.User
