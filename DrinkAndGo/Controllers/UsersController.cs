@@ -24,14 +24,14 @@ namespace DrinkAndGo.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            var q = from u in _context.User
-                    select u.Age;
+            //var q = from u in _context.User
+            //        select u.Age;
 
-            ViewBag.data = "[" + string.Join(",", q.ToList()) + "]";
+            //ViewBag.data = "[" + string.Join(",", q.ToList()) + "]";
 
-            var result = from u in _context.User
-                         group u by (u.Age / 10) into groups
-                         select groups;
+            //var result = from u in _context.User
+            //             group u by (u.Age / 10) into groups
+            //             select groups;
 
             return View(await _context.User.ToListAsync());
         }
@@ -53,7 +53,13 @@ namespace DrinkAndGo.Controllers
 
             return View(user);
         }
-
+        public async Task<IActionResult> Search(string name, decimal age, string type)
+        {
+            var result = from d in _context.User
+                         where (d.UserName==name && d.Age== age && d.Role == type)
+                         select d;
+            return View(await result.ToListAsync());
+        }
         // GET: Users/Create
         public IActionResult Create()
         {
@@ -92,7 +98,7 @@ namespace DrinkAndGo.Controllers
             {
                 UserRole = result.FirstOrDefault().Role;
                 UserName = result.FirstOrDefault().UserName;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ThePreferredDrinks", "Drinks");
             }
 
             ViewBag.Fail = true;

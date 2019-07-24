@@ -9,24 +9,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-<br />
-<br />
-<br />
-<br />
 
-<form class="form-inline" asp-controller="Users" asp-action="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    <input class="form-control mr-sm-2" type="search" placeholder="Enter user name" aria-label="Search" name="name">
-    <input class="form-control mr-sm-2" type="search" placeholder="Enter user age" aria-label="Search" name="age">
-    <input class="form-control mr-sm-2" type="search" placeholder="Enter user type" aria-label="Search" name="type">
-</form>
 
-@*<script>
-        var data = @ViewBag.data;
-    </script>
-
-    <div class="chart"></div>
-    <h2>Index</h2>*@
 
 <p>
     <a asp-action="Create">Create New</a>

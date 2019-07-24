@@ -29,6 +29,9 @@
     <Content Update="Views\Drinks\Search.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Users\Search.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Users\Login.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

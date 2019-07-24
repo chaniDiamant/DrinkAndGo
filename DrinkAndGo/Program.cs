@@ -264,13 +264,69 @@ namespace DrinkAndGo
                         Password = "1234",
                         Role = "Admin",
                         Age = 20
-                    });
+                    }); context.SaveChanges();
                     context.Add(new User()
                     {
                         UserName = "Eli",
                         Password = "1111",
                         Role = "Official",
                         Age = 30
+                    });
+                    context.SaveChanges();
+                    context.Add(new User()
+                    {
+                        UserName = "Roy",
+                        Password = "2222",
+                        Role = "Official",
+                        Age = 30
+                    });
+                    context.SaveChanges();
+                    context.Add(new User()
+                    {
+                        UserName = "Dana",
+                        Password = "9999",
+                        Role = "Official",
+                        Age = 20
+                    });
+                    context.SaveChanges();
+                    context.Add(new User()
+                    {
+                        UserName = "Eva",
+                        Password = "4545",
+                        Role = "Official",
+                        Age = 23
+                    });
+                    context.SaveChanges();
+                    context.Add(new User()
+                    {
+                        UserName = "Daniel",
+                        Password = "5432",
+                        Role = "Official",
+                        Age = 40
+                    });
+                    context.SaveChanges();
+                    context.Add(new User()
+                    {
+                        UserName = "Ofer",
+                        Password = "11511",
+                        Role = "Official",
+                        Age = 60
+                    });
+                    context.SaveChanges();
+                    context.Add(new User()
+                    {
+                        UserName = "Danit",
+                        Password = "115611",
+                        Role = "Official",
+                        Age = 60
+                    });
+                    context.SaveChanges();
+                    context.Add(new User()
+                    {
+                        UserName = "Avi",
+                        Password = "12111",
+                        Role = "Official",
+                        Age = 40
                     });
                     context.SaveChanges();
                 }
