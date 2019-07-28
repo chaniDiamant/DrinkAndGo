@@ -34,10 +34,9 @@
             <form class="form-inline" asp-controller="Drinks" asp-action="Search">
                 <img src="~/images/ajax-loader.gif" class="hide loader" />
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                <input class="form-control mr-sm-2" type="search" placeholder="Enter drink name" aria-label="Search" name="drinkname">
-                <input class="form-control mr-sm-2" type="search" placeholder="Enter max price" aria-label="Search" name="price">
                 <input class="form-control mr-sm-2" type="search" placeholder="Instock/Not instock" aria-label="Search" name="instok">
-                @if (@UsersController.UserName != null)
+                <input class="form-control mr-sm-2" type="search" placeholder="Enter max price" aria-label="Search" name="price">
+                <input class="form-control mr-sm-2" type="search" placeholder="Enter drink name" aria-label="Search" name="drinkname">                @if (@UsersController.UserName != null)
                 {
                     <div>Hello @UsersController.UserName</div>
                 }
