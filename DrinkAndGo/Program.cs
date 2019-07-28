@@ -330,6 +330,39 @@ namespace DrinkAndGo
                     });
                     context.SaveChanges();
                 }
+                if (context.Store.Count() == 0)
+                {
+                    context.Add(new Store()
+                    {
+                        Name = "Jerusalem",
+                        RealAdress = "King Gorg St.",
+                        Adress = "31.771959, 35.217018",
+                    }); context.SaveChanges();
+                    context.Add(new Store()
+                    {
+                        Name = "Tel-Aviv",
+                        RealAdress = "Dizingoph St.",
+                        Adress = "32.109333, 34.855499",
+                    }); context.SaveChanges();
+                    context.Add(new Store()
+                    {
+                        Name = "Haifa",
+                        RealAdress = "Hrzel St.",
+                        Adress = "32.794044, 34.989571",
+                    }); context.SaveChanges();
+                    context.Add(new Store()
+                    {
+                        Name = "Herzelya",
+                        RealAdress = "Shenkar St.",
+                        Adress = "32.166313, 34.843311",
+                    }); context.SaveChanges();
+                    context.Add(new Store()
+                    {
+                        Name = "Karmiel",
+                        RealAdress = "Yossef St.",
+                        Adress = "32.919945, 35.290146",
+                    }); context.SaveChanges();
+                }
             }
 
             host.Run();
