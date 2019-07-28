@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
-<br/>
-<br/>
+@M
+<br />
+<br />
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
@@ -31,33 +32,16 @@
             </div>
             <div class="col-md-6 ">
                 <h3> Our Branches</h3>
-                <ul style="list-style-type: disc">
-                    <li>
-                        <h4>Jerusalem</h4>
-                        <h5>King Gorg St.</h5>
-                    </li>
-                    <br />
-                    <li>
-                        <h4>Tel-Aviv</h4>
-                        <h5>Dizingoph St.</h5>
-                    </li>
-                    <br />
-                    <li>
-                        <h4>Herzelya</h4>
-                        <h5>Shenkar St.</h5>
-                    </li>
-                    <br />
-                    <li>
-                        <h4>Karmiel</h4>
-                        <h5>Yossef St.</h5>
-                    </li>
-                    <br />
-                    <li>
-                        <h4>Haifa</h4>
-                        <h5>Hrzel St.</h5>
-                    </li>
-
-                </ul>
+                @foreach (var item in Model)
+                {
+                    <ul style="list-style-type: disc">
+                        <li>
+                            <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                            <h5>@Html.DisplayFor(modelItem => item.RealAdress)</h5>
+                        </li>
+                        <br />
+                    </ul>
+                }
             </div>
         </div>
     </div>
@@ -71,7 +55,7 @@
             var Haifa = new google.maps.LatLng(32.794044, 34.989571);
             var Herzelya = new google.maps.LatLng(32.166313, 34.843311);
             var Karmiel = new google.maps.LatLng(32.919945, 35.290146);
-            var mapOptions = { center: myCenter, zoom: 5 };
+            var mapOptions = { center: myCenter, zoom: 7 };
             var map = new google.maps.Map(mapCanvas, mapOptions);
             var marker = new google.maps.Marker({
                 position: myCenter,
@@ -101,10 +85,9 @@
 
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOQecjiq8CEP664cBNSyqq3d8wM-F5Dbc&callback=myMap">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjA9p3fjmrFaFdPDW0mKkyfmUCLo2MweM&callback=myMap">
     </script>
 
-        </body >
-        </html >
-
+</body>
+</html>
 
