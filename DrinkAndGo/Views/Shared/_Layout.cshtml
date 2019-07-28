@@ -42,32 +42,32 @@
                 }
             </form>
 
+            <aside>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if (@UsersController.UserRole == "Admin")
+                        {
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact And Stores</a></li>
+                            <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
+                            <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
+                            <li><a asp-area="" asp-controller="Users" asp-action="Index">All Users</a></li>
+                        }
+                        @if (@UsersController.UserRole == null || @UsersController.UserRole == "Official")
+                        {
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact And Stores</a></li>
+                            <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
+                            <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
+                        }
+                    </ul>
 
-            <div class="navbar-collapse collapse">
-
-                <ul class="nav navbar-nav">
-                    @if (@UsersController.UserRole == "Admin")
-                    {
-                        <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
-                        <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
-                        <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact And Stores</a></li>
-                        <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
-                        <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
-                        <li><a asp-area="" asp-controller="Users" asp-action="Index">All Users</a></li>
-                    }
-                    @if (@UsersController.UserRole == null || @UsersController.UserRole == "Official")
-                    {
-                        <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
-                        <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
-                        <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact And Stores</a></li>
-                        <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
-                        <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
-                    }
-                </ul>
-                
-            </div>
+                </div>
+            </aside>
         </div>
     </nav>
     <div class="container body-content">
