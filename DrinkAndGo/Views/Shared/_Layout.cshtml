@@ -32,6 +32,7 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Drink&Go</a>
             </div>
             <form class="form-inline" asp-controller="Drinks" asp-action="Search">
+                <img src="~/images/ajax-loader.gif" class="hide loader" />
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <input class="form-control mr-sm-2" type="search" placeholder="Enter drink name" aria-label="Search" name="drinkname">
                 <input class="form-control mr-sm-2" type="search" placeholder="Enter max price" aria-label="Search" name="price">
@@ -42,7 +43,6 @@
                 }
             </form>
 
-            <aside>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         @if (@UsersController.UserRole == "Admin")
@@ -67,7 +67,6 @@
                     </ul>
 
                 </div>
-            </aside>
         </div>
     </nav>
     <div class="container body-content">

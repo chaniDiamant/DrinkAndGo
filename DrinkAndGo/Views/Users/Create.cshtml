@@ -33,10 +33,15 @@
                 <input asp-for="Role" class="form-control" />
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
+
+            <img src="~/images/ajax-loader.gif" class="hide loader" />
+            <button class="btn-danger btn btn-loader">Register</button>
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-            <br/>
+            <br />
             <canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;"></canvas>
             <script>
                 var c = document.getElementById("myCanvas");
