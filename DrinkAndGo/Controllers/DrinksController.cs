@@ -49,6 +49,7 @@ namespace DrinkAndGo.Controllers
         public async Task<IActionResult> Alcoholic()
         {
             var result = from d in _context.Drink
+                         join e in _context.Category on d.CategoryId equals e.CategoryId
                          where d.Category.CategoryId == 1
                          select d;
             return View(await result.ToListAsync());
@@ -56,6 +57,7 @@ namespace DrinkAndGo.Controllers
         public async Task<IActionResult> NonAlcoholic()
         {
             var result = from d in _context.Drink
+                         join e in _context.Category on d.CategoryId equals e.CategoryId
                          where d.Category.CategoryId == 2
                          select d;
             return View(await result.ToListAsync());
