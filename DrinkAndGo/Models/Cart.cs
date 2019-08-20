@@ -10,11 +10,15 @@ namespace DrinkAndGo.Models
     {
         [Key]
         public int CartId { get; set; }
-        public ICollection<Drink> Drinks { get; set; }
+
+        public virtual ICollection<DrinkCountPair> DrinksWithCount { get; set; }
+
+        public string UserForeignKey { get; set; }
+        public User User { get; set; }
 
         public Cart()
         {
-            Drinks = new LinkedList<Drink>();
+            DrinksWithCount = new LinkedList<DrinkCountPair>();
         }
     }
 }

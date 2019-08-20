@@ -11,8 +11,8 @@ using System;
 namespace DrinkAndGo.Migrations
 {
     [DbContext(typeof(DrinkAndGoContext))]
-    [Migration("20190728144504_fixCart")]
-    partial class fixCart
+    [Migration("20190820144053_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,13 @@ namespace DrinkAndGo.Migrations
                     b.Property<int>("CartId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("UserForeignKey");
+
                     b.HasKey("CartId");
+
+                    b.HasIndex("UserForeignKey")
+                        .IsUnique()
+                        .HasFilter("[UserForeignKey] IS NOT NULL");
 
                     b.ToTable("Cart");
                 });
@@ -50,8 +56,6 @@ namespace DrinkAndGo.Migrations
                     b.Property<int>("DrinkId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CartId");
-
                     b.Property<int>("CategoryId");
 
                     b.Property<string>("ImageThumbnailUrl");
@@ -72,11 +76,29 @@ namespace DrinkAndGo.Migrations
 
                     b.HasKey("DrinkId");
 
-                    b.HasIndex("CartId");
-
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Drink");
+                });
+
+            modelBuilder.Entity("DrinkAndGo.Models.DrinkCountPair", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("CartId");
+
+                    b.Property<int>("Count");
+
+                    b.Property<int?>("DrinkId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("DrinkId");
+
+                    b.ToTable("DrinkCountPairs");
                 });
 
             modelBuilder.Entity("DrinkAndGo.Models.Store", b =>
@@ -100,8 +122,6 @@ namespace DrinkAndGo.Migrations
 
                     b.Property<int>("Age");
 
-                    b.Property<int?>("CartId");
-
                     b.Property<string>("Password");
 
                     b.Property<string>("Role");
@@ -111,16 +131,30 @@ namespace DrinkAndGo.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("DrinkAndGo.Models.Cart", b =>
+                {
+                    b.HasOne("DrinkAndGo.Models.User", "User")
+                        .WithOne("Cart")
+                        .HasForeignKey("DrinkAndGo.Models.Cart", "UserForeignKey");
+                });
+
             modelBuilder.Entity("DrinkAndGo.Models.Drink", b =>
                 {
-                    b.HasOne("DrinkAndGo.Models.Cart")
-                        .WithMany("Drinks")
-                        .HasForeignKey("CartId");
-
                     b.HasOne("DrinkAndGo.Models.Category", "Category")
                         .WithMany("Drinks")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DrinkAndGo.Models.DrinkCountPair", b =>
+                {
+                    b.HasOne("DrinkAndGo.Models.Cart")
+                        .WithMany("DrinksWithCount")
+                        .HasForeignKey("CartId");
+
+                    b.HasOne("DrinkAndGo.Models.Drink", "Drink")
+                        .WithMany()
+                        .HasForeignKey("DrinkId");
                 });
 #pragma warning restore 612, 618
         }

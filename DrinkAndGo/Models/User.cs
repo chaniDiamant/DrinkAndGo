@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,11 +11,22 @@ namespace DrinkAndGo.Models
     {
         [Key]
         public string UserName { get; set; }
+
         public int Age { get; set; }
+
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
         public string Role { get; set; }
 
-        public int? CartId { get; set; }
+        public Cart Cart { get; set; }
+
+        public User()
+        {
+            this.Cart = new Cart();
+            this.Cart.User = this;
+        }
+
+ 
     }
 }

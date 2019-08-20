@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DrinkAndGo.Migrations
 {
-    public partial class Drink : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,30 +24,16 @@ namespace DrinkAndGo.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Store",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    OrderTotal = table.Column<decimal>(nullable: false),
-                    PhoneNumber = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    Adress = table.Column<string>(nullable: true),
+                    RealAdress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.OrderId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShoppingCart",
-                columns: table => new
-                {
-                    ShoppingCartId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCart", x => x.ShoppingCartId);
+                    table.PrimaryKey("PK_Store", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,7 +42,8 @@ namespace DrinkAndGo.Migrations
                 {
                     UserName = table.Column<string>(nullable: false),
                     Age = table.Column<int>(nullable: false),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -74,6 +61,7 @@ namespace DrinkAndGo.Migrations
                     ImageUrl = table.Column<string>(nullable: true),
                     InStock = table.Column<bool>(nullable: false),
                     IsPreferredDrink = table.Column<bool>(nullable: false),
+                    LongDescription = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     ShortDescription = table.Column<string>(nullable: true)
@@ -90,58 +78,57 @@ namespace DrinkAndGo.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderDetail",
+                name: "Cart",
                 columns: table => new
                 {
-                    OrderDetailId = table.Column<int>(nullable: false)
+                    CartId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Amount = table.Column<int>(nullable: false),
-                    DrinkId = table.Column<int>(nullable: false),
-                    OrderId = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false)
+                    UserForeignKey = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetail", x => x.OrderDetailId);
+                    table.PrimaryKey("PK_Cart", x => x.CartId);
                     table.ForeignKey(
-                        name: "FK_OrderDetail_Drink_DrinkId",
-                        column: x => x.DrinkId,
-                        principalTable: "Drink",
-                        principalColumn: "DrinkId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetail_Order_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Order",
-                        principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Cart_User_UserForeignKey",
+                        column: x => x.UserForeignKey,
+                        principalTable: "User",
+                        principalColumn: "UserName",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingCartItem",
+                name: "DrinkCountPairs",
                 columns: table => new
                 {
-                    ShoppingCartItemId = table.Column<string>(nullable: false),
-                    Amount = table.Column<int>(nullable: false),
-                    DrinkId = table.Column<int>(nullable: true),
-                    ShoppingCartId = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CartId = table.Column<int>(nullable: true),
+                    Count = table.Column<int>(nullable: false),
+                    DrinkId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingCartItem", x => x.ShoppingCartItemId);
+                    table.PrimaryKey("PK_DrinkCountPairs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShoppingCartItem_Drink_DrinkId",
+                        name: "FK_DrinkCountPairs_Cart_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Cart",
+                        principalColumn: "CartId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DrinkCountPairs_Drink_DrinkId",
                         column: x => x.DrinkId,
                         principalTable: "Drink",
                         principalColumn: "DrinkId",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCartItem_ShoppingCart_ShoppingCartId",
-                        column: x => x.ShoppingCartId,
-                        principalTable: "ShoppingCart",
-                        principalColumn: "ShoppingCartId",
-                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cart_UserForeignKey",
+                table: "Cart",
+                column: "UserForeignKey",
+                unique: true,
+                filter: "[UserForeignKey] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Drink_CategoryId",
@@ -149,45 +136,32 @@ namespace DrinkAndGo.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetail_DrinkId",
-                table: "OrderDetail",
+                name: "IX_DrinkCountPairs_CartId",
+                table: "DrinkCountPairs",
+                column: "CartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DrinkCountPairs_DrinkId",
+                table: "DrinkCountPairs",
                 column: "DrinkId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetail_OrderId",
-                table: "OrderDetail",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCartItem_DrinkId",
-                table: "ShoppingCartItem",
-                column: "DrinkId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCartItem_ShoppingCartId",
-                table: "ShoppingCartItem",
-                column: "ShoppingCartId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OrderDetail");
+                name: "DrinkCountPairs");
 
             migrationBuilder.DropTable(
-                name: "ShoppingCartItem");
+                name: "Store");
 
             migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Order");
+                name: "Cart");
 
             migrationBuilder.DropTable(
                 name: "Drink");
 
             migrationBuilder.DropTable(
-                name: "ShoppingCart");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Category");
