@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190728143300_cartFix.cs" />
+    <Compile Remove="Migrations\20190728143300_cartFix.Designer.cs" />
+    <Compile Remove="Migrations\20190728143411_smallFix.cs" />
+    <Compile Remove="Migrations\20190728143411_smallFix.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
   </ItemGroup>

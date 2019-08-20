@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<DrinkAndGo.Models.Drink>
+@using DrinkAndGo.Controllers
 
 @{
     ViewData["Title"] = "Index";
@@ -94,7 +95,12 @@
                         </div>
                     </div>
                 </td>
-
+                @if (UsersController.UserName != null)
+                {
+                    <td>
+                        @Html.ActionLink("Add to cart 🛒", "AddToCart", "Users", new { userId = UsersController.UserName, drinkId = item.DrinkId }, null)
+                    </td>
+                }
             </tr>
         }
     </tbody>

@@ -11,9 +11,10 @@ using System;
 namespace DrinkAndGo.Migrations
 {
     [DbContext(typeof(DrinkAndGoContext))]
-    partial class DrinkAndGoContextModelSnapshot : ModelSnapshot
+    [Migration("20190728124013_Cart")]
+    partial class Cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,8 +99,6 @@ namespace DrinkAndGo.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
-
-                    b.Property<int?>("CartId");
 
                     b.Property<string>("Password");
 

@@ -11,9 +11,10 @@ using System;
 namespace DrinkAndGo.Migrations
 {
     [DbContext(typeof(DrinkAndGoContext))]
-    partial class DrinkAndGoContextModelSnapshot : ModelSnapshot
+    [Migration("20190728144504_fixCart")]
+    partial class fixCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

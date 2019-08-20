@@ -30,5 +30,7 @@ namespace DrinkAndGo.Models
         }
 
         public DbSet<DrinkAndGo.Models.Store> Store { get; set; }
+
+        public DbSet<DrinkAndGo.Models.Cart> Cart { get; set; }
     }
 }

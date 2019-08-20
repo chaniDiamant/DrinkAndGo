@@ -11,9 +11,10 @@ using System;
 namespace DrinkAndGo.Migrations
 {
     [DbContext(typeof(DrinkAndGoContext))]
-    partial class DrinkAndGoContextModelSnapshot : ModelSnapshot
+    [Migration("20190728135638_cartFixPrpty")]
+    partial class cartFixPrpty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,6 +108,8 @@ namespace DrinkAndGo.Migrations
 
                     b.HasKey("UserName");
 
+                    b.HasIndex("CartId");
+
                     b.ToTable("User");
                 });
 
@@ -120,6 +123,13 @@ namespace DrinkAndGo.Migrations
                         .WithMany("Drinks")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DrinkAndGo.Models.User", b =>
+                {
+                    b.HasOne("DrinkAndGo.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId");
                 });
 #pragma warning restore 612, 618
         }

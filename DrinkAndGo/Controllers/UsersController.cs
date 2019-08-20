@@ -53,7 +53,7 @@ namespace DrinkAndGo.Controllers
 
             return View(user);
         }
-         public async Task<IActionResult> Check()
+        public async Task<IActionResult> Check()
         {
             var q = from u in _context.User.Distinct()
                     orderby u.Age
@@ -64,7 +64,7 @@ namespace DrinkAndGo.Controllers
         public async Task<IActionResult> Search(string name, decimal age, string type)
         {
             var result = from d in _context.User
-                         where (d.UserName==name && d.Age== age && d.Role == type)
+                         where (d.UserName == name && d.Age == age && d.Role == type)
                          select d;
             return View(await result.ToListAsync());
         }
@@ -92,7 +92,7 @@ namespace DrinkAndGo.Controllers
         public IActionResult Login()
         {
             ViewBag.Fail = false;
-             return View();
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -193,6 +193,45 @@ namespace DrinkAndGo.Controllers
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> AddToCart(string userId, int drinkId)
+        {
+            var user = await _context.User.SingleOrDefaultAsync(m => m.UserName == userId);
+            var drink = await _context.Drink.SingleOrDefaultAsync(m => m.DrinkId == drinkId);
+            if (user == null || drink == null)
+                return NotFound();
+
+            if (user.CartId == null)
+            {
+                Cart cartNew = new Cart();
+                _context.Cart.Add(cartNew);
+                user.CartId = cartNew.CartId; // might not work
+                _context.SaveChanges();
+            }
+
+            var cart = _context.Cart.Find(user.CartId); // returns cart with id 1, with the correct drink
+            cart.Drinks.Add(drink);
+            _context.SaveChanges();
+            return Redirect(ControllerContext.HttpContext.Request.Headers["Referer"]); // redirect to last page
+        }
+
+        public async Task<IActionResult> ViewCart(string userId)
+        {
+            
+
+            var user = await _context.User.SingleOrDefaultAsync(m => m.UserName == userId);
+
+            if (user.CartId == null)
+            {
+                Cart cartNew = new Cart();
+                _context.Cart.Add(cartNew);
+                user.CartId = cartNew.CartId; // might not work
+                _context.SaveChanges();
+            }
+            var cart = await _context.Cart.SingleOrDefaultAsync(m => m.CartId == user.CartId); // return cart with id 1, but drinks are empty
+
+            return View(cart.Drinks);
         }
 
         private bool UserExists(string id)
