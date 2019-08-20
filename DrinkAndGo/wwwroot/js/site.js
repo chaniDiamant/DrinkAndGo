@@ -1,5 +1,13 @@
 ﻿// Write your JavaScript code.
 $(function () {
+    $('.btn-outline-success').click(function () {
+        $(".loader").toggleClass('hide');
+        $(this).hide();
+    });
+});
+
+
+$(function () {
     d3.select(".chart")
         .selectAll("div")
         .data(data)
@@ -16,3 +24,4 @@ $(function () {
 function eqfeed_callback(response) {
   map.data.addGeoJson(response);
 }
+
