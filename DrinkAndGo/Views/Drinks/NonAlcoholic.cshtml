@@ -66,6 +66,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.InStock)
             </td>
+            
+            @if (UsersController.UserName != null)
+            {
+                <td>
+                    @Html.ActionLink("Add to cart 🛒", "AddToCart", "Users", new { drinkId = item.DrinkId }, null)
+                </td>
+            }
 
             @if (@UsersController.UserRole == "Admin")
             {
@@ -75,7 +82,7 @@
                     <a asp-action="Delete" asp-route-id="@item.DrinkId">Delete</a>
                 </td>
             }
-            </tr>
+        </tr>
 }
     </tbody>
 </table>

@@ -25,15 +25,30 @@ namespace DrinkAndGo.Migrations
                     b.Property<int>("CartId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("UserForeignKey");
+                    b.Property<string>("UserId");
+
+                    b.Property<int?>("UserId1");
 
                     b.HasKey("CartId");
 
-                    b.HasIndex("UserForeignKey")
-                        .IsUnique()
-                        .HasFilter("[UserForeignKey] IS NOT NULL");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Cart");
+                });
+
+            modelBuilder.Entity("DrinkAndGo.Models.Cart_Drink", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("DrinkId");
+
+                    b.Property<int>("DrinkCount");
+
+                    b.HasKey("UserId", "DrinkId");
+
+                    b.HasIndex("DrinkId");
+
+                    b.ToTable("Cart_Drinks");
                 });
 
             modelBuilder.Entity("DrinkAndGo.Models.Category", b =>
@@ -55,6 +70,8 @@ namespace DrinkAndGo.Migrations
                     b.Property<int>("DrinkId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("CartId");
+
                     b.Property<int>("CategoryId");
 
                     b.Property<string>("ImageThumbnailUrl");
@@ -75,6 +92,8 @@ namespace DrinkAndGo.Migrations
 
                     b.HasKey("DrinkId");
 
+                    b.HasIndex("CartId");
+
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Drink");
@@ -85,11 +104,11 @@ namespace DrinkAndGo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CartId");
+                    b.Property<int>("CartId");
 
                     b.Property<int>("Count");
 
-                    b.Property<int?>("DrinkId");
+                    b.Property<int>("DrinkId");
 
                     b.HasKey("Id");
 
@@ -116,7 +135,7 @@ namespace DrinkAndGo.Migrations
 
             modelBuilder.Entity("DrinkAndGo.Models.User", b =>
                 {
-                    b.Property<string>("UserName")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
@@ -125,7 +144,9 @@ namespace DrinkAndGo.Migrations
 
                     b.Property<string>("Role");
 
-                    b.HasKey("UserName");
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
 
                     b.ToTable("User");
                 });
@@ -133,12 +154,29 @@ namespace DrinkAndGo.Migrations
             modelBuilder.Entity("DrinkAndGo.Models.Cart", b =>
                 {
                     b.HasOne("DrinkAndGo.Models.User", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("DrinkAndGo.Models.Cart", "UserForeignKey");
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("DrinkAndGo.Models.Cart_Drink", b =>
+                {
+                    b.HasOne("DrinkAndGo.Models.Drink", "Drink")
+                        .WithMany("Cart")
+                        .HasForeignKey("DrinkId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DrinkAndGo.Models.User", "User")
+                        .WithMany("Cart")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DrinkAndGo.Models.Drink", b =>
                 {
+                    b.HasOne("DrinkAndGo.Models.Cart")
+                        .WithMany("DrinksWithCount")
+                        .HasForeignKey("CartId");
+
                     b.HasOne("DrinkAndGo.Models.Category", "Category")
                         .WithMany("Drinks")
                         .HasForeignKey("CategoryId")
@@ -147,13 +185,15 @@ namespace DrinkAndGo.Migrations
 
             modelBuilder.Entity("DrinkAndGo.Models.DrinkCountPair", b =>
                 {
-                    b.HasOne("DrinkAndGo.Models.Cart")
-                        .WithMany("DrinksWithCount")
-                        .HasForeignKey("CartId");
+                    b.HasOne("DrinkAndGo.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DrinkAndGo.Models.Drink", "Drink")
                         .WithMany()
-                        .HasForeignKey("DrinkId");
+                        .HasForeignKey("DrinkId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

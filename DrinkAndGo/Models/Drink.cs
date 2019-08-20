@@ -16,8 +16,10 @@ namespace DrinkAndGo.Models
         public string ImageThumbnailUrl { get; set; }
         public bool IsPreferredDrink { get; set; }
         public bool InStock { get; set; }
+
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
+        public List<Cart_Drink> Cart { get; set; } // carts this drink is in
     }
 }

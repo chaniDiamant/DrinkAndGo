@@ -278,14 +278,16 @@ namespace DrinkAndGo
                         UserName = "Gil",
                         Password = "1234",
                         Role = "Admin",
-                        Age = 20
+                        Age = 20,
+                        Cart = new List<Cart_Drink>()
                     }); context.SaveChanges();
                     context.Add(new User()
                     {
                         UserName = "Eli",
                         Password = "1111",
                         Role = "Official",
-                        Age = 30
+                        Age = 30,
+                        Cart = new List<Cart_Drink>()
                     });
                     context.SaveChanges();
                     context.Add(new User()
@@ -293,7 +295,8 @@ namespace DrinkAndGo
                         UserName = "Roy",
                         Password = "2222",
                         Role = "Official",
-                        Age = 30
+                        Age = 30,
+                        Cart = new List<Cart_Drink>()
                     });
                     context.SaveChanges();
                     context.Add(new User()
@@ -301,7 +304,8 @@ namespace DrinkAndGo
                         UserName = "Dana",
                         Password = "9999",
                         Role = "Official",
-                        Age = 20
+                        Age = 20,
+                        Cart = new List<Cart_Drink>()
                     });
                     context.SaveChanges();
                     context.Add(new User()
@@ -309,7 +313,8 @@ namespace DrinkAndGo
                         UserName = "Eva",
                         Password = "4545",
                         Role = "Official",
-                        Age = 23
+                        Age = 23,
+                        Cart = new List<Cart_Drink>()
                     });
                     context.SaveChanges();
                     context.Add(new User()
@@ -317,7 +322,8 @@ namespace DrinkAndGo
                         UserName = "Daniel",
                         Password = "5432",
                         Role = "Official",
-                        Age = 40
+                        Age = 40,
+                        Cart = new List<Cart_Drink>()
                     });
                     context.SaveChanges();
                     context.Add(new User()
@@ -325,7 +331,8 @@ namespace DrinkAndGo
                         UserName = "Ofer",
                         Password = "11511",
                         Role = "Official",
-                        Age = 60
+                        Age = 60,
+                        Cart = new List<Cart_Drink>()
                     });
                     context.SaveChanges();
                     context.Add(new User()
@@ -333,7 +340,8 @@ namespace DrinkAndGo
                         UserName = "Danit",
                         Password = "115611",
                         Role = "Official",
-                        Age = 60
+                        Age = 60,
+                        Cart = new List<Cart_Drink>()
                     });
                     context.SaveChanges();
                     context.Add(new User()
@@ -341,7 +349,8 @@ namespace DrinkAndGo
                         UserName = "Avi",
                         Password = "12111",
                         Role = "Official",
-                        Age = 40
+                        Age = 40,
+                        Cart = new List<Cart_Drink>()
                     });
                     context.SaveChanges();
                 }

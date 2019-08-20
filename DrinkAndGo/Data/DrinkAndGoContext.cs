@@ -16,15 +16,13 @@ namespace DrinkAndGo.Models
 
         public DbSet<Category> Category { get; set; }
 
-        public DbSet<Drink> Drink { get; set; }
-
         public DbSet<User> User { get; set; }
+        public DbSet<Drink> Drink { get; set; }
+        public DbSet<Cart_Drink> Cart_Drinks { get; set; }
+
 
 
         public DbSet<Store> Store { get; set; }
-
-        public DbSet<Cart> Cart { get; set; }
-        public DbSet<DrinkCountPair> DrinkCountPairs { get; set; }
 
         internal static Task<string> ToListAsync()
         {
@@ -33,10 +31,18 @@ namespace DrinkAndGo.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasOne(p => p.Cart)
-                .WithOne(i => i.User)
-                .HasForeignKey<Cart>(b => b.UserForeignKey);
+            modelBuilder.Entity<Cart_Drink>()
+            .HasKey(pt => new { pt.UserId, pt.DrinkId });
+
+            modelBuilder.Entity<Cart_Drink>()
+                .HasOne(pt => pt.User)
+                .WithMany(p => p.Cart)
+                .HasForeignKey(pt => pt.UserId);
+
+            modelBuilder.Entity<Cart_Drink>()
+                .HasOne(pt => pt.Drink)
+                .WithMany(t => t.Cart)
+                .HasForeignKey(pt => pt.DrinkId);
         }
     }
 }

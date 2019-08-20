@@ -212,13 +212,14 @@ namespace DrinkAndGo.Controllers
 
             var cart = user.Cart;
 
-            if (cart.DrinksWithCount.Count(m => m.Drink.DrinkId == drink.DrinkId) != 0) // if drink already in cart
-            {
-                var currentItem = cart.DrinksWithCount.FirstOrDefault(m => m.Drink.DrinkId == drink.DrinkId);
-                currentItem.Count = currentItem.Count + 1;
-            }
+            if (_context.Cart_Drinks.Count(c => c.DrinkId == drink.DrinkId && c.UserId == user.Id) == 0)
+                cart.Add(new Cart_Drink() { DrinkId = drink.DrinkId, Drink = drink, UserId = user.Id, User = user, DrinkCount = 1 });
             else
-                cart.DrinksWithCount.Add(new DrinkCountPair() { Drink = drink, Count = 1 });
+            {
+                var drinkChosen = _context.Cart_Drinks.FirstOrDefault(c => c.DrinkId == drink.DrinkId && c.UserId == user.Id);
+                drinkChosen.DrinkCount++;
+                //cart.Add(new Cart_Drink() { DrinkId = drink.DrinkId, Drink = drink, UserId = user.Id, User = user });
+            }
 
             _context.SaveChanges();
 
@@ -236,16 +237,50 @@ namespace DrinkAndGo.Controllers
                 return View("Error", new ErrorViewModel() { Message = "User not found, cant view cart" });
 
 
-            Dictionary<Drink, int> drinkToCount = new Dictionary<Drink, int>();
-            foreach (var drinkCountPair in user.Cart.DrinksWithCount)
-            {
-                if (drinkToCount.ContainsKey(drinkCountPair.Drink))
-                    drinkToCount[drinkCountPair.Drink] = drinkToCount[drinkCountPair.Drink] + 1;
-                else
-                    drinkToCount[drinkCountPair.Drink] = 1;
-            }
+            Dictionary<int, int> drinkToCount = new Dictionary<int, int>();
 
-            return View(drinkToCount); // fix view to work with the Group by
+
+            var drinks = _context.Cart_Drinks.Where(cd => cd.UserId == user.Id);
+
+            foreach (var cart_Drink in drinks)
+                drinkToCount[cart_Drink.DrinkId] = cart_Drink.DrinkCount;
+            //if (drinkToCount.ContainsKey(cart_Drink.DrinkId))
+            //    drinkToCount[cart_Drink.DrinkId] = drinkToCount[cart_Drink.DrinkId] + 1;
+            //else
+            //    drinkToCount[cart_Drink.DrinkId] = 1;
+
+            Dictionary<Drink, int> result = new Dictionary<Drink, int>();
+            foreach (var itm in drinkToCount)
+                result[_context.Drink.FirstOrDefault(m => m.DrinkId == itm.Key)] = itm.Value;
+
+
+            return View(result);
+        }
+
+        public async Task<IActionResult> RemoveFromCart(int drinkId)
+        {
+            if (UserName == null)
+                return View("Error", new ErrorViewModel() { Message = "User not connected, cant view cart" });
+
+            var user = await _context.User.SingleOrDefaultAsync(m => m.UserName == UserName);
+
+            if (user == null)
+                return View("Error", new ErrorViewModel() { Message = "User not found, cant view cart" });
+
+            var drink = await _context.Drink.SingleOrDefaultAsync(m => m.DrinkId == drinkId);
+
+            if (drink == null)
+                return View("Error", new ErrorViewModel() { Message = "Drink not found" });
+
+            var drinkChosen = _context.Cart_Drinks.FirstOrDefault(c => c.DrinkId == drink.DrinkId && c.UserId == user.Id);
+            drinkChosen.DrinkCount--;
+
+            if (drinkChosen.DrinkCount == 0)
+                user.Cart.Remove(drinkChosen);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("ViewCart");
         }
 
         private bool UserExists(string id)
