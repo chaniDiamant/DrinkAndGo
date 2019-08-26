@@ -63,7 +63,7 @@
                             <li><a asp-area="" asp-controller="Users" asp-action="ViewCart">My Cart 🛒</a> </li>
                             <li> Hello: <text> @UsersController.UserName </text> :) </li>
                         }
-                        @if (@UsersController.UserRole != "Admin")
+                        @if (@UsersController.UserRole != "Admin" && @UsersController.UserRole != "Official")
                    {
                     <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
                     <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
