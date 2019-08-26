@@ -40,68 +40,53 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => model.Category)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LongDescription)
-            </th>
+           
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShortDescription)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortDescription)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="ASP.NET" class="img1" />
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="ASP.NET" class="img1" />
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsPreferredDrink)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InStock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                </td>
-                <td>
-                    <button type="button" data-id="@Html.DisplayFor(modelItem => item.DrinkId)" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPreferredDrink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
 
-
-                    <div class="modal fade" id="myModal" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">@Html.DisplayFor(modelItem => item.Name)</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>@Html.DisplayFor(modelItem => item.LongDescription)</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            @if (UsersController.UserName != null)
+            {
+                <td>
+                    @Html.ActionLink("Add to cart 🛒", "AddToCart", "Users", new { drinkId = item.DrinkId }, null)
                 </td>
-                @if (UsersController.UserName != null)
-                {
-                    <td>
-                        @Html.ActionLink("Add to cart 🛒", "AddToCart", "Users", new { drinkId = item.DrinkId }, null)
-                    </td>
-                }
-            </tr>
+            }
+
+            @if (@UsersController.UserRole == "Admin")
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DrinkId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DrinkId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DrinkId">Delete</a>
+                </td>
+            }
+        </tr>
         }
     </tbody>
 </table>

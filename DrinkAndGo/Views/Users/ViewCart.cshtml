@@ -4,8 +4,9 @@
 @{
     ViewData["Title"] = "ViewCart";
 }
-
-<h2>ViewCart</h2>
+<br />
+<br />
+<h2>Shopping Cart</h2>
 
 <table class="table">
     <thead>
@@ -13,24 +14,14 @@
             <th>
                 Name
             </th>
-            <th>
-                ShortDescription
-            </th>
-            <th>
-                LongDescription
-            </th>
+            
             <th>
                 Price
             </th>
             <th>
-                ImageUrl
+                Image
             </th>
-            <th>
-                IsPreferredDrink
-            </th>
-            <th>
-                InStock
-            </th>
+           
             <th>
                 Count
             </th>
@@ -44,29 +35,21 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Key.Name)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key.ShortDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key.LongDescription)
-                </td>
+               
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Key.Price)
                 </td>
                 <td>
                     <img src="@Html.DisplayFor(modelItem => item.Key.ImageUrl)" alt="ASP.NET" class="img1" />
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key.IsPreferredDrink)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Key.InStock)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.Value)
                 </td>
                 <td>
                     <a asp-action="RemoveFromCart" asp-route-drinkId="@item.Key.DrinkId">Remove one</a>
+                    <br />
                     <a asp-action="AddToCart" asp-route-drinkId="@item.Key.DrinkId">Add one</a>
                 </td>
             </tr>
