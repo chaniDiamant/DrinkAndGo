@@ -14,14 +14,14 @@
             <th>
                 Name
             </th>
-            
+
             <th>
                 Price
             </th>
             <th>
                 Image
             </th>
-           
+
             <th>
                 Count
             </th>
@@ -35,7 +35,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Key.Name)
                 </td>
-               
+
 
                 <td>
                     @Html.DisplayFor(modelItem => item.Key.Price)
@@ -43,7 +43,7 @@
                 <td>
                     <img src="@Html.DisplayFor(modelItem => item.Key.ImageUrl)" alt="ASP.NET" class="img1" />
                 </td>
-                
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Value)
                 </td>
@@ -54,5 +54,13 @@
                 </td>
             </tr>
         }
+
+
     </tbody>
+
 </table>
+<div>
+    <a class="btn btn-default" asp-controller="Orders" asp-action="Create">
+        CHECHOUT
+    </a>
+</div>

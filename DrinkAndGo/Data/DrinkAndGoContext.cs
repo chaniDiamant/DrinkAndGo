@@ -44,5 +44,7 @@ namespace DrinkAndGo.Models
                 .WithMany(t => t.Cart)
                 .HasForeignKey(pt => pt.DrinkId);
         }
+
+        public DbSet<DrinkAndGo.Models.Order> Order { get; set; }
     }
 }
