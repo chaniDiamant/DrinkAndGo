@@ -25,7 +25,7 @@ namespace DrinkAndGo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            services.AddSession();
             services.AddDbContext<DrinkAndGoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DrinkAndGoContext")));
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
