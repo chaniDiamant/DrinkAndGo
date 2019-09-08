@@ -1,4 +1,5 @@
 ﻿@using DrinkAndGo.Controllers
+@using Microsoft.AspNetCore.Http;
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,42 +37,57 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <input class="form-control mr-sm-2" type="search" placeholder="Instock/Not instock" aria-label="Search" name="instok">
                 <input class="form-control mr-sm-2" type="search" placeholder="Enter max price" aria-label="Search" name="price">
-                <input class="form-control mr-sm-2" type="search" placeholder="Enter drink name" aria-label="Search" name="drinkname">                @if (@UsersController.UserName != null)
+                <input class="form-control mr-sm-2" type="search" placeholder="Enter drink name" aria-label="Search" name="drinkname">           
+                @if (Context.Session.GetString("UserName") != "" && Context.Session.GetString("UserName") != null)
                 {
-                    <div>Hello @UsersController.UserName</div>
+                <div>Hello @Context.Session.GetString("UserName")</div>
                 }
             </form>
 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        @if (@UsersController.UserRole == "Admin")
+                        @if (@Context.Session.GetString("UserRole") == "Admin")
                         {
                             <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
                             <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
                             <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
                             <li><a asp-area="" asp-controller="Stores" asp-action="Index">Contact And Stores</a></li>
-                            <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
+                            @if (Context.Session.GetString("UserName") == "" || Context.Session.GetString("UserName") == null)
+                            {
+                                <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-area="" asp-controller="Users" asp-action="Logout">Logout</a></li>
+                            }
                             <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
                             <li><a asp-area="" asp-controller="Users" asp-action="Index">All Users</a></li>
                         }
-                        @if (@UsersController.UserRole == "Official")
+                        @if (@Context.Session.GetString("UserRole") == "Official")
                         {
                             <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
                             <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
                             <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
                             <li><a asp-area="" asp-controller="Stores" asp-action="Index">Contact And Stores</a></li>
                             <li><a asp-area="" asp-controller="Users" asp-action="ViewCart">My Cart 🛒</a> </li>
-                           
+
                         }
-                        @if (@UsersController.UserRole != "Admin" && @UsersController.UserRole != "Official")
-                   {
-                    <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
-                    <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
-                    <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
-                    <li><a asp-area="" asp-controller="Stores" asp-action="Index">Contact And Stores</a></li>
-                    <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
-                    <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
-                }
+                        @if (@Context.Session.GetString("UserRole") != "Admin" && @Context.Session.GetString("UserRole") != "Official")
+                        {
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="Index">All Drinks</a></li>
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="Alcoholic">Alcoholic</a></li>
+                            <li><a asp-area="" asp-controller="Drinks" asp-action="NonAlcoholic">Non Alcholic</a></li>
+                            <li><a asp-area="" asp-controller="Stores" asp-action="Index">Contact And Stores</a></li>
+                            @if (Context.Session.GetString("UserName") == null || Context.Session.GetString("UserName") == "")
+                            {
+                                <li><a asp-area="" asp-controller="Users" asp-action="Login">Login</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-area="" asp-controller="Users" asp-action="Logout">Logout</a></li>
+                            }
+                            <li><a asp-area="" asp-controller="Users" asp-action="Create">Register</a></li>
+                        }
                     </ul>
 
                 </div>

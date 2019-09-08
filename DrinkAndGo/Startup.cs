@@ -24,8 +24,9 @@ namespace DrinkAndGo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             services.AddSession();
+            services.AddMvc();
+            
             services.AddDbContext<DrinkAndGoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DrinkAndGoContext")));
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -46,7 +47,7 @@ namespace DrinkAndGo
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

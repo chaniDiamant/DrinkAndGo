@@ -85,7 +85,9 @@ namespace DrinkAndGo.Controllers
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                 return RedirectToAction("ThePreferredDrinks", "Drinks");
+                HttpContext.Session.SetString("UserName", user.UserName);
+                HttpContext.Session.SetString("UserRole", user.Role);
+                return RedirectToAction("ThePreferredDrinks", "Drinks");
             }
             return View(user);
         }
@@ -93,6 +95,13 @@ namespace DrinkAndGo.Controllers
         {
             ViewBag.Fail = false;
             return View();
+        }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.SetString("UserName", "");
+            HttpContext.Session.SetString("UserRole", "");
+            return RedirectToAction("ThePreferredDrinks", "Drinks");
+           
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -104,8 +113,11 @@ namespace DrinkAndGo.Controllers
 
             if (result.ToList().Count > 0)
             {
+               
                 UserRole = result.FirstOrDefault().Role;
                 UserName = result.FirstOrDefault().UserName;
+                HttpContext.Session.SetString("UserName", UserName);
+                HttpContext.Session.SetString("UserRole", UserRole);
                 return RedirectToAction("ThePreferredDrinks", "Drinks");
             }
 
