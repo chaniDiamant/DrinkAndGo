@@ -24,14 +24,7 @@ namespace DrinkAndGo.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            //var q = from u in _context.User
-            //        select u.Age;
-
-            //ViewBag.data = "[" + string.Join(",", q.ToList()) + "]";
-
-            //var result = from u in _context.User
-            //             group u by (u.Age / 10) into groups
-            //             select groups;
+            
 
             return View(await _context.User.ToListAsync());
         }
