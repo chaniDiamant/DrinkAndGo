@@ -67,14 +67,14 @@
                 @Html.DisplayFor(modelItem => item.InStock)
             </td>
 
-            @if (UsersController.UserName != null)
+            @if (UsersController.UserName != null && @UsersController.UserRole != "Admin")
             {
                 <td>
                     @Html.ActionLink("Add to cart 🛒", "AddToCart", "Users", new { drinkId = item.DrinkId }, null)
                 </td>
             }
 
-            @if (@UsersController.UserRole == "Admin")
+            @if (@UsersController.UserRole == "Admin" )
             {
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.DrinkId">Edit</a> |

@@ -77,6 +77,8 @@ namespace DrinkAndGo.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(user);
+                UserRole = user.Role;
+                UserName = user.UserName;
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("UserName", user.UserName);
                 HttpContext.Session.SetString("UserRole", user.Role);
